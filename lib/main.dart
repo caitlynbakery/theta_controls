@@ -1,7 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import './format_json.dart';
+import 'buttons/info_button.dart';
+import 'buttons/state_button.dart';
+import 'dart:convert';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -38,22 +41,25 @@ class MyApp extends StatelessWidget {
           children: [
             Row(
               children: [
+                InfoButton(),
+                StateButton(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FlatButton(
-                    onPressed: () async {
-                      var response =
-                          await http.get('http://192.168.1.1/osc/info');
-                      var responseBody = response.body.toString();
+      padding: const EdgeInsets.all(8.0),
+      child: FlatButton(
+        onPressed: () async {
+          var body = json.encode({'name': 'camera.takePicture'});
+          var response =
+              await http.post('http://192.168.1.1/osc/commands/execute', body: body);
+          var responseBody = formatJson(response.body.toString());
 
-                      context
-                          .read<MainResponseWindow>()
-                          .updateResponseWindow(responseBody);
-                    },
-                    child: Text("Info"),
-                    color: Colors.teal[200],
-                  ),
-                )
+          context
+              .read<MainResponseWindow>()
+              .updateResponseWindow(responseBody);
+        },
+        child: Text("Take Picture"),
+        color: Colors.teal[200],
+      ),
+    )
               ],
             ),
             Expanded(
@@ -75,3 +81,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
