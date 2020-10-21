@@ -6,6 +6,8 @@ import 'package:theta4/buttons/info_button.dart';
 import 'package:theta4/buttons/show_picture_button.dart';
 import 'package:theta4/buttons/state_button.dart';
 import 'package:theta4/buttons/take_picture_button.dart';
+import 'package:theta4/buttons/show_full_image.dart';
+import 'package:theta4/buttons/list_files_button.dart';
 import 'dart:convert';
 import '../main.dart';
 
@@ -27,7 +29,9 @@ class HomeScreen extends StatelessWidget {
               InfoButton(),
               StateButton(),
               TakePictureButton(),
-              ShowPictureButton()
+              ShowPictureButton(),
+              ShowFullImage(),
+              ListFilesButton(),
             ],
           ),
           Expanded(

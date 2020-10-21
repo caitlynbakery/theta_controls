@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/picture_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => HomeScreen(),
+        '/picture': (context) => PictureScreen(),
       },
       initialRoute: '/',
     );
