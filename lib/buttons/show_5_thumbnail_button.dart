@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import 'dart:convert';
 
-class ListFilesButton extends StatelessWidget {
+class Show5ThumbnailButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,19 +21,30 @@ class ListFilesButton extends StatelessWidget {
           var response = await http
               .post('http://192.168.1.1/osc/commands/execute', body: body);
 
-          var responseBody = formatJson(response.body.toString());
+          var responseBody = json.decode(response.body);
 
+          var listAllData = responseBody['results']['entries'];
+
+          var urlArray = [];
+
+          for(var i = 0; i <listAllData.length; i++){
+            urlArray.add(listAllData[i]['fileUrl']);
+            
+          }
+          
           context
-              .read<MainResponseWindow>()
-              .updateResponseWindow(responseBody);
+            .read<CameraNotifier>()
+            .updateLastFiveUrl(urlArray);
+            
+          print(urlArray);
 
-          // var fileUrl = responseBody['state']['_latestFileUrl'];
 
-          // context.read<CameraNotifier>().updateUrl(fileUrl);
+          // context
+          //     .read<MainResponseWindow>()
+          //     .updateResponseWindow(responseBody);
 
-          // print(fileUrl);
         },
-        child: Text('List Files'),
+        child: Text('Show 5 Thumbnail'),
         color: Colors.teal[200],
       ),
     );

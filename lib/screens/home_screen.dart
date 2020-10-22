@@ -8,6 +8,11 @@ import 'package:theta4/buttons/state_button.dart';
 import 'package:theta4/buttons/take_picture_button.dart';
 import 'package:theta4/buttons/show_full_image.dart';
 import 'package:theta4/buttons/list_files_button.dart';
+import 'package:theta4/buttons/set_video_mode_button.dart';
+import 'package:theta4/buttons/set_image_mode_button.dart';
+import 'package:theta4/buttons/start_video_button.dart';
+import 'package:theta4/buttons/stop_video_button.dart';
+import 'package:theta4/buttons/show_5_thumbnail_button.dart';
 import 'dart:convert';
 import '../main.dart';
 
@@ -32,8 +37,15 @@ class HomeScreen extends StatelessWidget {
               ShowPictureButton(),
               ShowFullImage(),
               ListFilesButton(),
+              SetVideoModeButton(),
+              SetImageModeButton(),
             ],
           ),
+          Row(children: [
+            StartVideoButton(),
+            StopVideoButton(),
+            Show5ThumbnailButton(),
+          ],),
           Expanded(
             child: Row(
               children: [

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import 'dart:convert';
 
-class ListFilesButton extends StatelessWidget {
+class SetImageModeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,10 +13,8 @@ class ListFilesButton extends StatelessWidget {
       child: FlatButton(
         onPressed: () async {
           var body =
-              json.encode({'name': 'camera.listFiles', 'parameters': {
-                'fileType': 'all',
-                'entryCount': 5,
-                'maxThumbSize': 0,
+              json.encode({'name': 'camera.setOptions', 'parameters': {
+                'options': {'captureMode': 'image'}
               }});
           var response = await http
               .post('http://192.168.1.1/osc/commands/execute', body: body);
@@ -26,14 +24,8 @@ class ListFilesButton extends StatelessWidget {
           context
               .read<MainResponseWindow>()
               .updateResponseWindow(responseBody);
-
-          // var fileUrl = responseBody['state']['_latestFileUrl'];
-
-          // context.read<CameraNotifier>().updateUrl(fileUrl);
-
-          // print(fileUrl);
         },
-        child: Text('List Files'),
+        child: Text('Set Image Mode'),
         color: Colors.teal[200],
       ),
     );

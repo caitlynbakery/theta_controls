@@ -24,7 +24,15 @@ class MainResponseWindow with ChangeNotifier {
 
 class CameraNotifier with ChangeNotifier {
   String _latestFileUrl = "";
+  var _lastFiveUrl = [];
   String get latestFileUrl => _latestFileUrl;
+
+  List<dynamic> get lastFiveUrl => _lastFiveUrl;
+
+  void updateLastFiveUrl(url) {
+    _lastFiveUrl = url;
+    notifyListeners();
+  }
 
   void updateUrl(url) {
     _latestFileUrl = url;
