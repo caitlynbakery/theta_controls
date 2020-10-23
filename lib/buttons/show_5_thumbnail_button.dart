@@ -14,7 +14,7 @@ class Show5ThumbnailButton extends StatelessWidget {
         onPressed: () async {
           var body =
               json.encode({'name': 'camera.listFiles', 'parameters': {
-                'fileType': 'all',
+                'fileType': 'image',
                 'entryCount': 5,
                 'maxThumbSize': 0,
               }});
@@ -35,7 +35,7 @@ class Show5ThumbnailButton extends StatelessWidget {
           context
             .read<CameraNotifier>()
             .updateLastFiveUrl(urlArray);
-            
+
           print(urlArray);
 
 

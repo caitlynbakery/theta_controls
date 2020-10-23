@@ -60,10 +60,36 @@ class HomeScreen extends StatelessWidget {
                     ? Container()
                     : Container(
                         width: 500,
-                        child: Image.network(
+                        child: GestureDetector(
+                          onTap: (){
+Navigator.of(context).pushNamed('/picture', arguments: Provider.of<CameraNotifier>(context, listen: false).latestFileUrl);
+                          },
+                          child: Image.network(
                             Provider.of<CameraNotifier>(context)
                                 .latestFileUrl + "?type=thumb"),
-                      )
+                        )
+                      ),
+                // ListView.builder(
+                //   itemCount: Provider.of<CameraNotifier>(context).lastFiveUrl.length,
+                //   itemBuilder: (context, index) {
+                //     return Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[index]);
+                //   },
+                // )
+
+                Provider.of<CameraNotifier>(context).lastFiveUrl.length == 0 ? Container() : Container(
+                  width: 400,
+                  child: ListView(
+                    children: [
+                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[0] + "?type=thumb"),),
+                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[1] + "?type=thumb")),
+                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[2] + "?type=thumb")),
+                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[3] + "?type=thumb")),
+                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[4] + "?type=thumb"))
+
+
+                    ]
+                  ),
+                )
               ],
             ),
           )
