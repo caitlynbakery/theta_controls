@@ -41,19 +41,21 @@ class HomeScreen extends StatelessWidget {
               SetImageModeButton(),
             ],
           ),
-          Row(children: [
-            StartVideoButton(),
-            StopVideoButton(),
-            Show5ThumbnailButton(),
-          ],),
+          Row(
+            children: [
+              StartVideoButton(),
+              StopVideoButton(),
+              Show5ThumbnailButton(),
+            ],
+          ),
           Expanded(
             child: Row(
               children: [
                 Container(
                   width: 300,
                   child: SingleChildScrollView(
-                    child: Text(Provider.of<MainResponseWindow>(context)
-                        .responseText),
+                    child: Text(
+                        Provider.of<MainResponseWindow>(context).responseText),
                   ),
                 ),
                 Provider.of<CameraNotifier>(context).latestFileUrl == ""
@@ -61,14 +63,17 @@ class HomeScreen extends StatelessWidget {
                     : Container(
                         width: 500,
                         child: GestureDetector(
-                          onTap: (){
-Navigator.of(context).pushNamed('/picture', arguments: Provider.of<CameraNotifier>(context, listen: false).latestFileUrl);
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/picture',
+                                arguments: Provider.of<CameraNotifier>(context,
+                                        listen: false)
+                                    .latestFileUrl);
                           },
                           child: Image.network(
-                            Provider.of<CameraNotifier>(context)
-                                .latestFileUrl + "?type=thumb"),
-                        )
-                      ),
+                              Provider.of<CameraNotifier>(context)
+                                      .latestFileUrl +
+                                  "?type=thumb"),
+                        )),
                 // ListView.builder(
                 //   itemCount: Provider.of<CameraNotifier>(context).lastFiveUrl.length,
                 //   itemBuilder: (context, index) {
@@ -76,20 +81,61 @@ Navigator.of(context).pushNamed('/picture', arguments: Provider.of<CameraNotifie
                 //   },
                 // )
 
-                Provider.of<CameraNotifier>(context).lastFiveUrl.length == 0 ? Container() : Container(
-                  width: 400,
-                  child: ListView(
-                    children: [
-                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[0] + "?type=thumb"),),
-                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[1] + "?type=thumb")),
-                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[2] + "?type=thumb")),
-                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[3] + "?type=thumb")),
-                     Container(child: Image.network(Provider.of<CameraNotifier>(context).lastFiveUrl[4] + "?type=thumb"))
-
-
-                    ]
-                  ),
-                )
+                Provider.of<CameraNotifier>(context).lastFiveUrl.length == 0
+                    ? Container()
+                    : Container(
+                        width: 400,
+                        child: ListView(children: [
+                          Container(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/picture',
+                                    arguments: Provider.of<CameraNotifier>(
+                                            context,
+                                            listen: false)
+                                        .lastFiveUrl[0]);
+                              },
+                              child: Image.network(
+                                Provider.of<CameraNotifier>(context)
+                                        .lastFiveUrl[0] +
+                                    "?type=thumb",
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/picture',
+                                    arguments: Provider.of<CameraNotifier>(
+                                            context,
+                                            listen: false)
+                                        .lastFiveUrl[1]);
+                              },
+                              child: Image.network(
+                                Provider.of<CameraNotifier>(context)
+                                        .lastFiveUrl[1] +
+                                    "?type=thumb",
+                              ),
+                            ),
+                          ),
+                          Container(
+                              child: Image.network(
+                                  Provider.of<CameraNotifier>(context)
+                                          .lastFiveUrl[2] +
+                                      "?type=thumb")),
+                          Container(
+                              child: Image.network(
+                                  Provider.of<CameraNotifier>(context)
+                                          .lastFiveUrl[3] +
+                                      "?type=thumb")),
+                          Container(
+                            child: Image.network(
+                                Provider.of<CameraNotifier>(context)
+                                        .lastFiveUrl[4] +
+                                    "?type=thumb"),
+                          ),
+                        ]),
+                      ),
               ],
             ),
           )

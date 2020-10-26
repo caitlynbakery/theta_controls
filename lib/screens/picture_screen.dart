@@ -8,18 +8,20 @@ class PictureScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final latestUrl = ModalRoute.of(context).settings.arguments as String;
+    final fileUrl = ModalRoute.of(context).settings.arguments as String;
 
-    print("printing from picture screen $latestUrl");
+    print("printing from picture screen $fileUrl");
     return Scaffold(
         appBar: AppBar(
           title: Text('Picture Display'),
         ),
-        body: Provider.of<CameraNotifier>(context).latestFileUrl == ""
+        body: fileUrl == ""
             ? Container(child: Text("nothing"))
             : Panorama(
               child: Image.network(
-                  Provider.of<CameraNotifier>(context).latestFileUrl),
+                  fileUrl,
+                  // Provider.of<CameraNotifier>(context).latestFileUrl
+                  ),
             )
         // Image.network(Provider.of<CameraNotifier>(context).latestFileUrl),
 
